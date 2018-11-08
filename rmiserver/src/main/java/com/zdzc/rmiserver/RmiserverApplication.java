@@ -1,6 +1,6 @@
 package com.zdzc.rmiserver;
 
-import com.zdzc.api.SumService;
+import com.zdzc.api.service.SumService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

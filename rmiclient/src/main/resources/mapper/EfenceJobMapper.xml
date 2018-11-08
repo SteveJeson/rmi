@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zdzc.rmiclient.dao.EfenceJobMapper" >
+  <resultMap id="BaseResultMap" type="com.zdzc.api.entity.EfenceJob" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="job_code" property="jobCode" jdbcType="VARCHAR" />
+    <result column="efence_code" property="efenceCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="period" property="period" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="device_codes" property="deviceCodes" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from efence_job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zdzc.api.entity.EfenceJob" >
+    insert into efence_job (id, job_code, efence_code, 
+      name, status,
+      remark, period, type, 
+      device_codes)
+    values (#{id,jdbcType=INTEGER}, #{jobCode,jdbcType=VARCHAR}, #{efenceCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{period,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{deviceCodes,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zdzc.api.entity.EfenceJob" >
+    update efence_job
+    set job_code = #{jobCode,jdbcType=VARCHAR},
+      efence_code = #{efenceCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      period = #{period,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      device_codes = #{deviceCodes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, job_code, efence_code, name, status, create_time, remark, period, type, 
+    device_codes
+    from efence_job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, job_code, efence_code, name, status, create_time, remark, period, type, 
+    device_codes
+    from efence_job
+  </select>
+
+  <select id="selectEfenceInfoByJobCode" resultType="java.util.Map" parameterType="java.lang.String">
+    select a.type efenceType, a.coordinates coordinates, b.period period, b.type alarmType,
+    b.device_codes deviceCodes, b.name jobName
+    from efence a, efence_job b where a.code = b.efence_code and b.job_code = #{code}
+  </select>
+
+  <update id="updateByJobCode" parameterType="com.zdzc.api.entity.EfenceJob" >
+    update efence_job
+    set status = #{status,jdbcType=INTEGER}
+    where job_code = #{jobCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

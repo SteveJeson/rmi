@@ -1,6 +1,6 @@
 package com.zdzc.rmiclient.controller;
 
-import com.zdzc.api.SumService;
+import com.zdzc.api.service.SumService;
 import com.zdzc.rmiclient.util.SpringContextUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
