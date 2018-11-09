@@ -18,11 +18,12 @@ public class MainController {
     @RequestMapping(value="/sum", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getSum(HttpServletRequest request){
-        System.out.println("=============收到http请求=============");
         SumService service = (SumService) SpringContextUtil.getBean(SumService.class);
+
         int a =  Integer.parseInt(request.getParameter("a"));
         int b = Integer.parseInt(request.getParameter("b"));
         int sum = service.getSum(a, b);
+
         Map<String, Object> map = new HashMap<>();
         map.put("sum", sum);
         map.put("statusCode", 200);

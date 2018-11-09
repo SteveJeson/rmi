@@ -2,6 +2,9 @@ package com.zdzc.rmiclient.util;
 
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.remoting.rmi.RmiProxyFactoryBean;
+
+import java.util.List;
 
 public class SpringContextUtil {
     private static ApplicationContext applicationContext;
@@ -21,4 +24,6 @@ public class SpringContextUtil {
     public static Object getBean(Class<?> type){
         return applicationContext.getBean(type);
     }
+
+
 }
