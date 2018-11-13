@@ -24,6 +24,7 @@ public class MainController {
         int b = Integer.parseInt(request.getParameter("b"));
         int sum = service.getSum(a, b);
 
+
         Map<String, Object> map = new HashMap<>();
         map.put("sum", sum);
         map.put("statusCode", 200);
